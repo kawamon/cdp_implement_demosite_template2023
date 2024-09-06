@@ -72,81 +72,88 @@
         database: 'pageviews'
       });
 
-      var successCallback = function(callbackResults) {
-        var resultMsg  = '<h3>Result</h3>';
-        var nbp_1  = '';
-        var nbp_2  = '';
+      td.ready(function(){
+        var td_client_id = td.getCookie('td_client_id');
+        console.log("td_client_id: ", td_client_id);
 
-        callbackResults.forEach(function(callbackResult) {
-          resultMsg     += '<h4>Key</h4>';
-          resultMsg     += '<ul>';
-          Object.keys(callbackResult.key).forEach(function(key) {
-            resultMsg += '<li>' + key + '</li>';
-          });
-          resultMsg     += '</ul>';
-
-          resultMsg     += '<h4>Segments</h4>';
-          if(callbackResult.values.length <= 0) {
-            resultMsg += '<span>No segments</span>';
-          } else {
+        var successCallback = function(callbackResults) {
+          var resultMsg  = '<h3>Result</h3>';
+          var nbp_1  = '';
+          var nbp_2  = '';
+  
+          callbackResults.forEach(function(callbackResult) {
+            resultMsg     += '<h4>Key</h4>';
             resultMsg     += '<ul>';
-            callbackResult.values.forEach(function(value) {
-              resultMsg += ('<li>' + value + '</li>');
+            Object.keys(callbackResult.key).forEach(function(key) {
+              resultMsg += '<li>' + key + '</li>';
             });
             resultMsg     += '</ul>';
-          }
+  
+            resultMsg     += '<h4>Segments</h4>';
+            if(callbackResult.values.length <= 0) {
+              resultMsg += '<span>No segments</span>';
+            } else {
+              resultMsg     += '<ul>';
+              callbackResult.values.forEach(function(value) {
+              resultMsg += ('<li>' + value + '</li>');
+              });
+              resultMsg     += '</ul>';
+            }
 
-          resultMsg     += '<h4>Attributes</h4>';
-          if(callbackResult.attributes.length <= 0) {
-            resultMsg += '<span>No attributes</span>';
-          } else {
-            resultMsg += '<ul>';
-            Object.keys(callbackResult.attributes).forEach(function(key) {
-              resultMsg += ('<li>' + key + ' = ' + callbackResult.attributes[key] + '</li>');
-              if (key === 'nbp_1') nbp_1 = callbackResult.attributes[key];
-              if (key === 'nbp_2') nbp_2 = callbackResult.attributes[key];
-            });
-            resultMsg += '</ul>';
-          }
-        });
+            resultMsg     += '<h4>Attributes</h4>';
+            if(callbackResult.attributes.length <= 0) {
+              resultMsg += '<span>No attributes</span>';
+            } else {
+              resultMsg += '<ul>';
+              Object.keys(callbackResult.attributes).forEach(function(key) {
+                resultMsg += ('<li>' + key + ' = ' + callbackResult.attributes[key] + '</li>');
+                if (key === 'nbp_1') nbp_1 = callbackResult.attributes[key];
+                if (key === 'nbp_2') nbp_2 = callbackResult.attributes[key];
+              });
+              resultMsg += '</ul>';
+            }
+          });
+  
+          updateContent(nbp_1, nbp_2);
 
-        updateContent(nbp_1, nbp_2);
+          var resultArea = document.getElementById('resultArea');
+          resultArea.innerHTML = resultMsg;
+        }
 
-        var resultArea = document.getElementById('resultArea');
-        resultArea.innerHTML = resultMsg;
-      }
+        var errorCallback = function(error) {
+          console.log(error);
+          resultArea.innerHTML = error;
+        }
+  
+        if (token === '') {
+            // FIXME
+            // default API token for Debugging
+            token = '24d82a5e-59a8-48c3-b63a-996a108deaef';
+        } 
 
-      var errorCallback = function(error) {
-        console.log(error);
-        resultArea.innerHTML = error;
-      }
-
-      if (token === '') {
-          // FIXME
-          // default API token for Debugging
-          token = '24d82a5e-59a8-48c3-b63a-996a108deaef';
-      } 
-
-console.log("clientId = " + clientId);
-console.log("token = " +token);
-
-      td.fetchUserSegments({
-        audienceToken: [token],
-        keys: {td_client_id: clientId}
-      }, successCallback, errorCallback);
+        console.log("td_client_id = " + td_client_id);
+        console.log("token = " +token);
+  
+        td.fetchUserSegments({
+          audienceToken: [token],
+          keys: {td_client_id: td_client_id}
+        }, successCallback, errorCallback);
+      });
     }
 
     document.getElementById('fetch_segment_button').onclick = function() {
-      var clientId = document.getElementById('client_id_input').value;
+      //var clientId = document.getElementById('client_id_input').value;
       var token    = document.getElementById('token_input').value;
-      fetch_segment_func(clientId, token);
+      //fetch_segment_func(clientId, token);
+      fetch_segment_func(token);
     };
 
 
     document.addEventListener('DOMContentLoaded', function() {
-      var clientId = 'eb914927-2ea6-41f4-bddf-b75f89d464b6'; // 例のクライアントID
+      //var clientId = 'eb914927-2ea6-41f4-bddf-b75f89d464b6'; // 例のクライアントID
       var token = '99eff39c-8934-4528-bce4-6b8c34570c60'; // 例のトークン
-      fetch_segment_func(clientId, token);
+      //fetch_segment_func(clientId, token);
+      fetch_segment_func(token);
     });
 
   </script>
