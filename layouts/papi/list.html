@@ -27,6 +27,7 @@
 
     function updateContent(nbp_1, nbp_2) {
       var popupContent = document.getElementById('popupContent');
+      console.log('popupContent element:', popupContent);
       var content = '';
 
       if (nbp_1 === 'TreasureBike Bike Helmet w/ Flip Visor') {
@@ -152,8 +153,6 @@ console.log("token = " +token);
 
     </div>
   </div>
-</section>
-
 <!-- 追加予定-->
   <!-- ポップアップ用のHTML -->
   <div id="popup" class="popup" style="display: none;">
@@ -201,6 +200,8 @@ console.log("token = " +token);
       cursor: pointer;
     }
   </style>
+</section>
+
 
 
 {{ end }}
