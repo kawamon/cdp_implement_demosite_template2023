@@ -73,7 +73,8 @@
       });
 
       td.ready(function(){
-        var td_client_id = td.getCookie('td_client_id');
+        //var td_client_id = td.getCookie('td_client_id');
+        var td_client_id = td.getTrackValues().td_client_id;
         console.log("td_client_id: ", td_client_id);
 
         var successCallback = function(callbackResults) {
