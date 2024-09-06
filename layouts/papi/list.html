@@ -7,6 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
+      <div id="contentArea"></div>
 <!-- FIXME -->
 <img src="https://in.treasuredata.com/postback/v3/event/tk_l0_access_log/pixel_test?td_format=pixel&td_write_key=11869/b7cd3e25cea0db008b2a56a84189369c047474d9&td_global_id=td_global_id&td_ip=td_ip&td_ua=td_ua&key1=val1&key2=val2&key3=val3" />
         <h3 class="
@@ -21,6 +22,28 @@
       </div>
       <div class="highlight" id="resultArea"></div>
   <script>
+
+    function updateContent(nbp_1, nbp_2) {
+      var contentArea = document.getElementById('contentArea');
+      var content = '';
+
+      if (nbp_1 === 'TreasureBike Bike Helmet w/ Flip Visor') {
+        content += '<h2>バイクヘルメットのオファー</h2>';
+        content += '<p>フリップバイザー付きの最新バイクヘルメットをチェックしてください！</p>';
+      }
+    
+      if (nbp_2 === 'Treasurebike Boot Bag 30L') {
+        content += '<h2>ブーツバッグ特集</h2>';
+        content += '<p>30Lのブーツバッグは次の冒険に最適です！</p>';
+      }
+    
+      if (content === '') {
+        content = '<p>ストアへようこそ！</p>';
+      }
+    
+      contentArea.innerHTML = content;
+}
+
     var fetch_segment_func = function(clientId, token) {
       var td = new Treasure({
         host: 'in.treasuredata.com',
@@ -30,6 +53,8 @@
 
       var successCallback = function(callbackResults) {
         var resultMsg  = '<h3>Result</h3>';
+        var nbp_1  = '';
+        var nbp_2  = '';
 
         callbackResults.forEach(function(callbackResult) {
           resultMsg     += '<h4>Key</h4>';
@@ -57,10 +82,14 @@
             resultMsg += '<ul>';
             Object.keys(callbackResult.attributes).forEach(function(key) {
               resultMsg += ('<li>' + key + ' = ' + callbackResult.attributes[key] + '</li>');
+              if (key === 'nbp_1') nbp_1 = callbackResult.attributes[key];
+              if (key === 'nbp_2') nbp_2 = callbackResult.attributes[key];
             });
             resultMsg += '</ul>';
           }
         });
+
+        updateContent(nbp_1, nbp_2);
 
         var resultArea = document.getElementById('resultArea');
         resultArea.innerHTML = resultMsg;
@@ -91,6 +120,14 @@ console.log("token = " +token);
       var token    = document.getElementById('token_input').value;
       fetch_segment_func(clientId, token);
     };
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var clientId = 'eb914927-2ea6-41f4-bddf-b75f89d464b6'; // 例のクライアントID
+      var token = '99eff39c-8934-4528-bce4-6b8c34570c60'; // 例のトークン
+      fetch_segment_func(clientId, token);
+    });
+
   </script>
 
     </div>
