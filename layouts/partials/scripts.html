@@ -26,6 +26,12 @@ netlifyIdentity.on('logout', user => {
 */
 
 document.addEventListener('snipcart.ready', () => {
+  // Check if Treasure Data SDK is loaded
+  if (typeof td === 'undefined') {
+    console.error('Treasure Data SDK not loaded. Please check JS-SDK installation.');
+    return;
+  }
+
   // You can safely use window.Snipcart here
   this.addItemEvent = window.Snipcart.events.on('item.added', (cartItem) => {
     console.log("cart.ready");
