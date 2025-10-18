@@ -90,10 +90,9 @@ logo = "images/logo.png"
 home = "Home"
 # Meta data
 description = "This is a demo site for Treasure Academy. This demo site is based on https://themes.gohugo.io/themes/hargo-hugo-ecommerce-theme/. "
-author = "tatsuo.kawasaki@treasure-data.com"
-# google map
-# *FIXME*
-gmapAPI = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD3nZAoJg6Km3Q8IL3Z-crGY5bOjIZKCu0&libraries=places"
+author = "Treasure Academy"
+# google map (currently disabled in contact.yml)
+gmapAPI = "https://maps.googleapis.com/maps/api/js?key=<必要に応じてキーを指定>&libraries=places"
 mapLatitude = "51.5223477"
 mapLongitude = "-0.1622023"
 mapMarker = "images/marker.png"
@@ -106,8 +105,7 @@ location = "Tokyo, Japan"
 # copyright
 copyright = "| Copyright &copy; 2021 [Treasure Academy](https://academy.treasure-data.com) All Rights Reserved |"
 # Snipcart Credentials
-# **FIXME**x
-snipcartApiKey = "NmVhYzg0ZmMtN2E2Yi00Mzg0LTk2NmQtN2UxYmRlMWNiOWNhNjM3NjA2OTQyODk2NTA4ODMz"
+snipcartApiKey = "<SnipcartのAPI Keyを指定>"
 currencySymbol = "$"
 
 

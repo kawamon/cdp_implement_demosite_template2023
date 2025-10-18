@@ -66,12 +66,17 @@
     }
 
     var fetch_segment_func = function(token) {
-      var td = new Treasure({
-        host: 'in.treasuredata.com',
-        writeKey: '',
-        database: 'pageviews'
-      });
+      // Check if Treasure SDK instance is available (should be initialized via Netlify Snippet injection)
+      if (typeof td === 'undefined') {
+        console.error('Treasure Data SDK not initialized. Please check JS-SDK installation via Netlify Snippet injection.');
+        var resultArea = document.getElementById('resultArea');
+        if (resultArea) {
+          resultArea.innerHTML = '<p style="color: red;">Error: Treasure Data SDK not initialized. Please check JS-SDK installation via Netlify Snippet injection.</p>';
+        }
+        return;
+      }
 
+      // Reuse the global td instance initialized in the main tracking code
       td.ready(function(){
         //var td_client_id = td.getCookie('td_client_id');
         var td_client_id = td.getTrackValues().td_client_id;
@@ -122,8 +127,11 @@
         }
 
         var errorCallback = function(error) {
-          console.log(error);
-          resultArea.innerHTML = error;
+          console.error('Profile API Error:', error);
+          var resultArea = document.getElementById('resultArea');
+          if (resultArea) {
+            resultArea.innerHTML = '<p style="color: red;">Error: ' + error + '</p>';
+          }
         }
   
         if (token === '') {
