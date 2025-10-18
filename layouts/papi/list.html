@@ -11,12 +11,12 @@
       <div id="contentArea"></div>
 -->
 <!-- FIXME -->
-<img src="https://in.treasuredata.com/postback/v3/event/tk_l0_access_log/pixel_test?td_format=pixel&td_write_key=11869/b7cd3e25cea0db008b2a56a84189369c047474d9&td_global_id=td_global_id&td_ip=td_ip&td_ua=td_ua&key1=val1&key2=val2&key3=val3" />
+<img src="https://in.treasuredata.com/postback/v3/event/<自分のイニシャル>_l0_access_log/pixel_test?td_format=pixel&td_write_key=<Write Only APIKEYを指定>&td_global_id=td_global_id&td_ip=td_ip&td_ua=td_ua&key1=val1&key2=val2&key3=val3" />
 
         <h3 class="
         mb-4">Profile API sample</h3>
         <p>Example: td_client_id = d5b94a74-1005-485a-ba0f-c67b6d12b6ee</p>
-        <p>Example: Profile API Token = 24d82a5e-59a8-48c3-b63a-996a108deaef</p>
+        <p>Example: Profile API Token = <Profile API Tokenを指定></p>
         <form action="{{ site.Params.papi.formAction }}" method="POST">
           <input type="text" class="form-control mb-2" id="client_id_input" name="td_client_id" placeholder="Enter Client ID">
           <input type="text" class="form-control mb-2" id="token_input" name="token" placeholder="Enter Profile API Token">
@@ -138,7 +138,7 @@
         if (token === '') {
             // FIXME
             // default API token for Debugging
-            token = '24d82a5e-59a8-48c3-b63a-996a108deaef';
+            token = '<Profile API Tokenを指定>';
         } 
 
         console.log("td_client_id = " + td_client_id);
@@ -161,7 +161,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       //var clientId = 'eb914927-2ea6-41f4-bddf-b75f89d464b6'; // 例のクライアントID
-      var token = '99eff39c-8934-4528-bce4-6b8c34570c60'; // 例のトークン
+      var token = '<Profile API Tokenを指定>'; // 例のトークン
       //fetch_segment_func(clientId, token);
       fetch_segment_func(token);
     });
