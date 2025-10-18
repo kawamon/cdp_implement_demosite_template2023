@@ -20,3 +20,6 @@ Thumbs.db
 
 # Local documentation and reports
 docs/
+
+# Claude Code configuration
+.claude/
